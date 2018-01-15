@@ -1,0 +1,15 @@
+title Uusi muistiinpano SPA:ssa
+
+Kayttaja->Selain: 
+note left of Selain
+kayttaja kirjottaa kenttään muistiinpanonsa ja painaa "talleta"-painiketta
+end note
+
+
+note left of Selain
+ Javascript (spa.js) lähettää uuden muistiinpanon POST-pyynnöllä ja uudelleen kirjoittaa sivun, jotta 
+ uusi muistiinpano näkyisi.
+end note
+
+Selain->Palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+Palvelin->Selain: status 201
