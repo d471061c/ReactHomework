@@ -1,1 +1,1 @@
-# READ ME! :)
+# 1.2 lisää komponentteja
