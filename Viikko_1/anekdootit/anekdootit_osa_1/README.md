@@ -1,0 +1,1 @@
+# 1.12* anekdootit osa1
