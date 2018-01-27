@@ -1,1 +1,1 @@
-# 2.6 puhelinluettelo osa 2
+# 2.7 puhelinluettelo osa 2
