@@ -33,10 +33,13 @@ class App extends React.Component {
       
   }
 
-  deletePerson = (id) => {
+  deletePerson = (person) => {
     return () => {
-      let personsleft = this.state.persons.filter(person => person.id !== id);
-      personService.deletePerson(id).then(response => {this.setState({persons : personsleft})})
+      if (window.confirm("poistetaanko " + person.name)) {
+        let personsleft = this.state.persons.filter(p => p.id !== person.id);
+        personService.deletePerson(person.id).then(response => {this.setState({persons : personsleft})})
+      }
+      
     }
   }
   
@@ -58,7 +61,7 @@ class App extends React.Component {
     <tr key={person.name}>
       <td> {person.name} </td>
       <td> {person.number} </td>
-      <td> <button onClick={this.deletePerson(person.id)}>Poista </button> </td>
+      <td> <button onClick={this.deletePerson(person)}>Poista </button> </td>
     </tr>)
     
     return (
