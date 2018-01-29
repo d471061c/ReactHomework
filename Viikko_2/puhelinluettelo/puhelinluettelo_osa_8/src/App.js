@@ -27,7 +27,7 @@ class App extends React.Component {
 
       const person = {name : this.state.newName, number: this.state.newNumber}
       personService.addPerson(person).then(response => {
-        const persons = this.state.persons.concat({name:this.state.newName, number:this.state.newNumber})
+        const persons = this.state.persons.concat(response.data)
         this.setState({persons, newName:'', newNumber:''})
       })
       
