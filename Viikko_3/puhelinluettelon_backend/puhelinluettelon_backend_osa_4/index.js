@@ -39,7 +39,7 @@ app.get("/api/persons/:id", (req, res) => {
 app.delete("/api/persons/:id", (req, res) => {
   const id = Number(req.params.id)
   persons = persons.filter(person => person.id !== id)
-  res.end()
+  res.status(204).end()
 })
 
 app.get("/api/persons", (req, res) => {
