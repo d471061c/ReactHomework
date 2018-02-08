@@ -1,0 +1,1 @@
+# 2.19* puhelinluettelo osa 12

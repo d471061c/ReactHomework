@@ -1,0 +1,1 @@
+# 3.19* puhelinluettelo ja tietokanta, osa 7
