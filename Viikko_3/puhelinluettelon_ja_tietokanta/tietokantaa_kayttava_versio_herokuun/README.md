@@ -1,1 +1,1 @@
-# 3.19* puhelinluettelo ja tietokanta, osa 7
+# 3.20 tietokantaa käyttävä versio herokuun
