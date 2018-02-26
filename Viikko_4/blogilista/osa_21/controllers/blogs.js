@@ -40,7 +40,7 @@ blogRouter.post('/', async (request, response) => {
     const savedblog = await blog.save()
     user.blogs = user.blogs.concat(savedblog._id)
     await user.save()
-    response.json(Blog.format(savedblog))
+    response.json(savedblog)
   } catch (exception) {
     if (exception.name === 'JsonWebTokenError' ) {
       response.status(401).json({ error: exception.message })
