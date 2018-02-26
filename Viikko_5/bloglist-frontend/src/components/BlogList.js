@@ -1,6 +1,7 @@
 import React from 'react'
 import blogService from '../services/blogs'
 import Blog from '../components/Blog'
+import Notification from '../components/Notification'
 
 class BlogList extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class BlogList extends React.Component {
       title: '',
       author: '',
       url: '',
+      message: '',
       blogs: []
     }
   }
@@ -32,7 +34,14 @@ class BlogList extends React.Component {
         url: this.state.url
       }
       const response = await blogService.addBlog(blog)
+      
+
+      this.setState({ message : `a new blog '${this.state.title}' by ${this.state.author} added` })
       this.setState({ title: '', author: '', url: '', blogs: this.state.blogs.concat(response) })
+      setTimeout(() => {
+        this.setState({ error: '' })
+      }, 5000)
+
     } catch (exception) {
       console.log("Error: ", exception)
     }
@@ -40,16 +49,14 @@ class BlogList extends React.Component {
   
   blogList = () => (
     <div>
-      <h2>blogs</h2>
       {this.state.blogs.map(blog => 
         <Blog key={blog._id} blog={blog}/>
       )}
     </div>
   )
 
-  render() {
-    return (<div>
-      {this.blogList()}
+  blogForm = () => (
+    <div>
       <h3>Create new</h3>
       <form onSubmit={this.createBlog}>
         <div>
@@ -75,6 +82,15 @@ class BlogList extends React.Component {
         </div>
         <button type="submit">Create blog</button>
       </form>
+    </div>
+  )
+
+  render() {
+    return (<div>
+      <h2> Blogs </h2>
+      {this.state.message !== '' && Notification(this.state.message, 'info')}
+      {this.blogList()}
+      {this.blogForm()}
     </div>)
   }
 }

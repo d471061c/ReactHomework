@@ -44,7 +44,7 @@ class App extends React.Component {
     } catch (exception) {
       this.setState({ error : 'Wrong username or password' })
       setTimeout(() => {
-        this.setState({ error: undefined })
+        this.setState({ error: '' })
       }, 5000)
     }
   }
@@ -80,6 +80,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {this.state.error !== '' && Notification(this.state.error, 'error')}
         {this.state.user === null ?
               this.loginForm() :
               (
@@ -88,7 +89,7 @@ class App extends React.Component {
                   <BlogList/>
                 </div>
               )}
-        {this.state.error !== null && Notification(this.state.error)}
+        
       </div>
     );
   }
