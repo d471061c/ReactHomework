@@ -1,7 +1,10 @@
 import React from 'react'
 import blogService from '../services/blogs'
 import Blog from '../components/Blog'
+import BlogForm from '../components/BlogForm'
 import Notification from '../components/Notification'
+import Togglable from './Togglable';
+
 
 class BlogList extends React.Component {
   constructor(props) {
@@ -21,7 +24,7 @@ class BlogList extends React.Component {
     )
   }
 
-  handleInputChange = (event) => {
+  handleInput = (event) => {
     this.setState({ [event.target.name] : event.target.value })
   }
 
@@ -55,42 +58,20 @@ class BlogList extends React.Component {
     </div>
   )
 
-  blogForm = () => (
-    <div>
-      <h3>Create new</h3>
-      <form onSubmit={this.createBlog}>
-        <div>
-          title:
-          <input type="text"
-                name="title"
-                value={this.state.title}
-                onChange={this.handleInputChange}/>
-        </div>
-        <div>
-          author:
-          <input type="text"
-                name="author"
-                value={this.state.author}
-                onChange={this.handleInputChange}/>
-        </div>
-        <div>
-          url:
-          <input type="text"
-                name="url"
-                value={this.state.url}
-                onChange={this.handleInputChange}/>
-        </div>
-        <button type="submit">Create blog</button>
-      </form>
-    </div>
-  )
+  
 
   render() {
     return (<div>
       <h2> Blogs </h2>
       {this.state.message !== '' && Notification(this.state.message, 'info')}
       {this.blogList()}
-      {this.blogForm()}
+      <Togglable buttonLabel="new blog">
+        <BlogForm title={this.state.title}
+                  author={this.state.author}
+                  url={this.state.url}
+                  onSubmit={this.createBlog}
+                  handleInput={this.handleInput}/>
+      </Togglable>
     </div>)
   }
 }

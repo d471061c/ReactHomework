@@ -3,7 +3,7 @@ import Notification from './components/Notification'
 import BlogList from './components/BlogList'
 import blogService from './services/blogs'
 import loginService from './services/login'
-
+import LoginForm from './components/LoginForm'
 
 class App extends React.Component {
 
@@ -54,35 +54,17 @@ class App extends React.Component {
     window.localStorage.clear()
   }
 
-  loginForm = () => (
-    <div>
-      <h2> Log in to application </h2>
-      <form onSubmit={this.login}>
-        <div>
-          username:
-          <input type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleLoginFieldChange}/>
-        </div>
-        <div>
-          password:
-          <input type="password"
-                 name="password"
-                 value={this.state.password}
-                 onChange={this.handleLoginFieldChange}/>
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  )
-
   render() {
     return (
       <div>
         {this.state.error !== '' && Notification(this.state.error, 'error')}
         {this.state.user === null ?
-              this.loginForm() :
+              <LoginForm username={this.state.username}
+                          password={this.state.password}
+                          loginAction={this.login}
+                          handleInput={this.handleLoginFieldChange}/>
+            
+             :
               (
                 <div key="bloglist">
                   <div>{this.state.user.name} has logged in <button onClick={this.logout}>Logout</button></div>
