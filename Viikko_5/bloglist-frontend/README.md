@@ -6,3 +6,4 @@
 * 5.3 blogilistan frontend, osa 3
 * 5.4* blogilistan frontend, osa 4
 * 5.5 blogilistan frontend, osa 5
+* 5.6* blogilistan frontend, osa 6

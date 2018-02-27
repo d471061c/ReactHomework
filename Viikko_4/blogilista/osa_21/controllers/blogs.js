@@ -36,7 +36,7 @@ blogRouter.post('/', async (request, response) => {
     }
 
     const user = await User.findById(decodedToken.id)
-    
+    blog.user = user._id
     const savedblog = await blog.save()
     user.blogs = user.blogs.concat(savedblog._id)
     await user.save()
