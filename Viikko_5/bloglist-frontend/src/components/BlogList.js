@@ -20,7 +20,7 @@ class BlogList extends React.Component {
 
   componentDidMount() {
     blogService.getAll().then(blogs =>
-      this.setState({ blogs })
+      this.setState({ blogs : blogs.sort((a, b) => a.likes < b.likes) })
     )
   }
 
@@ -52,8 +52,8 @@ class BlogList extends React.Component {
 
   like = (blog) => async () => {
     const newBlog = await BlogService.likeBlog(blog)
-    const blogs = this.state.blogs.map(b => b._id === newBlog._id ? newBlog : b)
-    this.setState( blogs )
+    if (newBlog.like === blog.like + 1) blog.like++
+    this.setState( {blogs : this.state.blogs.sort((a, b) => a.likes < b.likes)} )
   }
   
   blogList = () => (
