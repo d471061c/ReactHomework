@@ -12,3 +12,4 @@
 * 5.9* blogilistan frontend, osa 9
 * 5.10* blogilistan frontend, osa 10
 * 5.11 blogilistan frontend, osa 11
+* 5.12 blogilistan testit, osa 1
