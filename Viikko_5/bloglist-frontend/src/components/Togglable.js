@@ -17,7 +17,6 @@ class Togglable extends React.Component {
     const showWhenVisible = { display: this.state.visible ? '' : 'none' }
 
     const { buttonLabel, children } = this.props
-    console.log(children)
     return (
       <div>
         <div style={hideWhenVisible}>

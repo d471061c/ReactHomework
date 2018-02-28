@@ -21,17 +21,18 @@ class Blog extends React.Component {
       marginBottom: 5
     }
     
-    console.log(this.props.blog)
-    const {title, author, url, likes, user} = this.props.blog
+    const { title, author, url, likes, user } = this.props.blog
+    const { onLike } = this.props
+
     const showIfExpanded = { display : this.state.expanded ? '' : 'none' }
 
     return (
-      <div style={blogStyle} onClick={this.toggle}>
-        {title} {author}
+      <div style={blogStyle}>
+        <p onClick={this.toggle}>{title} {author}</p>
         <div style={showIfExpanded}>
           <p>
           <a href={url}> {url} </a> <br/>
-          {likes} likes <button>like</button><br/>
+          {likes} likes <button onClick={onLike}>like</button><br/>
           added by {user.name}</p>
         </div>
       </div>  

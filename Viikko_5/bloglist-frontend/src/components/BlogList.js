@@ -4,7 +4,7 @@ import Blog from '../components/Blog'
 import BlogForm from '../components/BlogForm'
 import Notification from '../components/Notification'
 import Togglable from './Togglable';
-
+import BlogService from '../services/blogs'
 
 class BlogList extends React.Component {
   constructor(props) {
@@ -49,23 +49,27 @@ class BlogList extends React.Component {
       console.log("Error: ", exception)
     }
   }
+
+  like = (blog) => async () => {
+    const newBlog = await BlogService.likeBlog(blog)
+    const blogs = this.state.blogs.map(b => b._id === newBlog._id ? newBlog : b)
+    this.setState( blogs )
+  }
   
   blogList = () => (
     <div>
       {this.state.blogs.map(blog => 
-        <Blog key={blog._id} blog={blog}/>
+        <Blog key={blog._id} blog={blog} onLike={this.like(blog)}/>
       )}
     </div>
   )
-
-  
 
   render() {
     return (<div>
       <h2> Blogs </h2>
       {this.state.message !== '' && Notification(this.state.message, 'info')}
       {this.blogList()}
-      <Togglable buttonLabel="new blog">
+      <Togglable buttonLabel="new blog" ref={component => this.BlogForm = component}>
         <BlogForm title={this.state.title}
                   author={this.state.author}
                   url={this.state.url}
