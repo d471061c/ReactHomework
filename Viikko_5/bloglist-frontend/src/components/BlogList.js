@@ -50,25 +50,32 @@ class BlogList extends React.Component {
     }
   }
 
+
+  delete = (blog) => async () => {
+    const result = await BlogService.deleteBlog(blog)
+    this.setState({blogs : this.state.blogs.filter(b => b._id !== result._id)})
+  }
+
   like = (blog) => async () => {
     const newBlog = await BlogService.likeBlog(blog)
     if (newBlog.like === blog.like + 1) blog.like++
     this.setState( {blogs : this.state.blogs.sort((a, b) => a.likes < b.likes)} )
   }
   
-  blogList = () => (
+  blogList = (user) => (
     <div>
       {this.state.blogs.map(blog => 
-        <Blog key={blog._id} blog={blog} onLike={this.like(blog)}/>
+        <Blog key={blog._id} blog={blog} onDelete={this.delete(blog)} onLike={this.like(blog)} currentUser={user}/>
       )}
     </div>
   )
 
-  render() {
+  render(props) {
+    const { user } = this.props
     return (<div>
       <h2> Blogs </h2>
       {this.state.message !== '' && Notification(this.state.message, 'info')}
-      {this.blogList()}
+      {this.blogList(user)}
       <Togglable buttonLabel="new blog" ref={component => this.BlogForm = component}>
         <BlogForm title={this.state.title}
                   author={this.state.author}

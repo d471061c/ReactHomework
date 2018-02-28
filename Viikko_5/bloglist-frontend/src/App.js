@@ -68,7 +68,7 @@ class App extends React.Component {
               (
                 <div key="bloglist">
                   <div>{this.state.user.name} has logged in <button onClick={this.logout}>Logout</button></div>
-                  <BlogList/>
+                  <BlogList user={this.state.user}/>
                 </div>
               )}
         

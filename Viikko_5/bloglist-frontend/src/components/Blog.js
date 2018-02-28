@@ -22,10 +22,9 @@ class Blog extends React.Component {
     }
     
     const { title, author, url, likes, user } = this.props.blog
-    const { onLike } = this.props
+    const { onLike, onDelete, currentUser } = this.props
 
     const showIfExpanded = { display : this.state.expanded ? '' : 'none' }
-
     return (
       <div style={blogStyle}>
         <p onClick={this.toggle}>{title} {author}</p>
@@ -33,7 +32,9 @@ class Blog extends React.Component {
           <p>
           <a href={url}> {url} </a> <br/>
           {likes} likes <button onClick={onLike}>like</button><br/>
-          added by {user.name}</p>
+          added by {user.name}<br/>
+          {(!(user) || user.name === currentUser.name) && (<button onClick={onDelete}> Delete </button>)}
+          </p>
         </div>
       </div>  
     )

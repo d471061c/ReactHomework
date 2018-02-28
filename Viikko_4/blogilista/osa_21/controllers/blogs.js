@@ -60,16 +60,16 @@ blogRouter.delete('/:id', async (request, response) => {
       return response.status(401).json({ error: 'token missing or invalid' })
     }
 
-    if (request.body.content === undefined) {
-      return response.status(400).json({ error: 'content missing' })
-    }
     const user = await User.findById(decodedToken.id)
     const blog = await Blog.findById(request.params.id)
-    if (user._id === blog.user._id) {
-      await Blog.findByIdAndRemove(request.params.id)
-      return response.status(204).end()
+
+    if (decodedToken.id !== blog.user.toString()) {
+      console.log(user._id)
+      console.log(blog.user)
+      return response.status(400).send({ error : 'Only the owner of the blog can remove the blog' })
     }
-    response.status(400).send({ error : 'Only the owner of the blog can remove the blog' })
+    await Blog.findByIdAndRemove(request.params.id)
+    return response.json(blog)
   } catch (exception) {
     console.log(exception)
     response.status(400).send({ error : 'malformatted id' })
