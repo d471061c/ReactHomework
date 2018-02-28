@@ -5,8 +5,13 @@ import BlogForm from '../components/BlogForm'
 import Notification from '../components/Notification'
 import Togglable from './Togglable';
 import BlogService from '../services/blogs'
+import PropTypes from 'prop-types'
 
 class BlogList extends React.Component {
+  static propTypes = {
+    user: PropTypes.object.isRequired
+  }
+
   constructor(props) {
     super(props)
     this.state = {
