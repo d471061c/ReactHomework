@@ -18,4 +18,22 @@ describe('<SimpleBlog/>', () => {
     expect(blogHeader.text()).toContain(blog.author)
     expect(blogLikes.text()).toContain(`blog has ${blog.likes} likes`)
   })
+
+  test('function is called twice when button is pressed twice', () => {
+    const blog = {
+      title: 'Simple Blog',
+      author: 'Simple Blogger',
+      likes: 10
+    }
+
+    const mockHandler = jest.fn()
+    
+    const blogComponent = shallow(<SimpleBlog blog={blog} onClick={mockHandler}/>)
+    const likeButton = blogComponent.find('.like-button')
+
+    likeButton.simulate('click')
+    likeButton.simulate('click')
+    
+    expect(mockHandler.mock.calls.length).toBe(2)
+  })
 });
