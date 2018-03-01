@@ -46,9 +46,10 @@ class BlogList extends React.Component {
 
       this.setState({ message : `a new blog '${this.state.title}' by ${this.state.author} added` })
       this.setState({ title: '', author: '', url: '', blogs: this.state.blogs.concat(response) })
+      
       setTimeout(() => {
-        this.setState({ error: '' })
-      }, 5000)
+        this.setState({ message : '' })
+      }, 1000)
 
     } catch (exception) {
       console.log("Error: ", exception)

@@ -35,12 +35,12 @@ class Blog extends React.Component {
 
     const showIfExpanded = { display : this.state.expanded ? '' : 'none' }
     return (
-      <div style={blogStyle}>
-        <p onClick={this.toggle}>{title} {author}</p>
-        <div style={showIfExpanded}>
+      <div className="blog" style={blogStyle}>
+        <div className="blog-header" onClick={this.toggle}>{title} {author}</div>
+        <div className="blog-content" style={showIfExpanded}>
           <p>
           <a href={url}> {url} </a> <br/>
-          {likes} likes <button onClick={onLike}>like</button><br/>
+          <span className="blog-likes">{likes} likes <button onClick={onLike}>like</button></span><br/>
           added by {user.name}<br/>
           {(!(user) || user.name === currentUser.name) && (<button onClick={onDelete}> Delete </button>)}
           </p>

@@ -27,7 +27,7 @@ describe('<SimpleBlog/>', () => {
     }
 
     const mockHandler = jest.fn()
-    
+
     const blogComponent = shallow(<SimpleBlog blog={blog} onClick={mockHandler}/>)
     const likeButton = blogComponent.find('.like-button')
 
