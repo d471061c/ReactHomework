@@ -3,7 +3,6 @@ import { shallow } from 'enzyme'
 import Blog from './Blog'
 
 describe('<Blog/>', () => {
-  test('renders contents', () => {
     const blog = {
       title: 'Title',
       author: 'Author',
@@ -19,17 +18,23 @@ describe('<Blog/>', () => {
 
     const blank = () => {}
 
+  test('renders contents', () => {
     const blogComponent = shallow(<Blog blog={blog} onLike={blank} onDelete={blank} currentUser={user}/>)
     
-    const blogCard= blogComponent.find('.blog')
     const blogContent = blogComponent.find('.blog-content')
     const blogHeader = blogComponent.find('.blog-header')
-    
-    const blogLikes = blogComponent.find('.blog-likes')
 
     expect(blogHeader.text()).toContain(blog.title)
     expect(blogHeader.text()).toContain(blog.author)
     expect(blogContent.getElement().props.style).toEqual({ display: 'none' })
+  })
+
+  test('visible when pressed', () => {
+    const blogComponent = shallow(<Blog blog={blog} onLike={blank} onDelete={blank} currentUser={user}/>)
+    const blogHeader = blogComponent.find('.blog-header')
+    blogHeader.simulate('click')
+    const blogContent = blogComponent.find('.blog-content')
+    expect(blogContent.getElement().props.style).toEqual({ display: '' })
   })
 
 
