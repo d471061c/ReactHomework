@@ -15,3 +15,5 @@
 * 5.12 blogilistan testit, osa 1
 * 5.13 blogilistan testit, osa 2
 * 5.14* blogilistan testit, osa 3
+* 5.15 blogilistan testit, osa 4
+* 5.16* blogilistan testit, osa 5
