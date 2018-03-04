@@ -3,13 +3,13 @@ import { shallow } from 'enzyme'
 import SimpleBlog from './SimpleBlog'
 
 describe('<SimpleBlog/>', () => {
-  test('renders content', () => {
-    const blog = {
-      title: 'Simple Blog',
-      author: 'Simple Blogger',
-      likes: 10
-    }
+  const blog = {
+    title: 'Simple Blog',
+    author: 'Simple Blogger',
+    likes: 10
+  }
 
+  test('renders content', () => {
     const blogComponent = shallow(<SimpleBlog blog={blog}/>)
     const blogHeader = blogComponent.find('.blog-header')
     const blogLikes = blogComponent.find('.blog-likes')
@@ -20,12 +20,6 @@ describe('<SimpleBlog/>', () => {
   })
 
   test('function is called twice when button is pressed twice', () => {
-    const blog = {
-      title: 'Simple Blog',
-      author: 'Simple Blogger',
-      likes: 10
-    }
-
     const mockHandler = jest.fn()
 
     const blogComponent = shallow(<SimpleBlog blog={blog} onClick={mockHandler}/>)

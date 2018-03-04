@@ -37,5 +37,4 @@ describe('<Blog/>', () => {
     expect(blogContent.getElement().props.style).toEqual({ display: '' })
   })
 
-
 });
