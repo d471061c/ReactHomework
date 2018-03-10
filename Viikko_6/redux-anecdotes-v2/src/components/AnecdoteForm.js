@@ -1,5 +1,6 @@
 import React from 'react'
 import { createAnecdote } from '../reducers/anecdoteReducer'
+import { connect } from 'react-redux'
 
 class AnecdoteForm extends React.Component {
   handleSubmit = (e) => {
@@ -22,4 +23,11 @@ class AnecdoteForm extends React.Component {
   }
 }
 
-export default AnecdoteForm
+
+
+const ConnectedAnecdoteForm = connect(
+  null,
+  { createAnecdote }
+)(AnecdoteForm)
+
+export default ConnectedAnecdoteForm
