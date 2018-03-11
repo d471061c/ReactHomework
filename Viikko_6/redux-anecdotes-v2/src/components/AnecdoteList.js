@@ -2,6 +2,7 @@ import React from 'react'
 import { voteAnecdote } from '../reducers/anecdoteReducer'
 import { notify } from '../reducers/notifierReducer'
 import { connect } from 'react-redux'
+import anecdoteService from '../services/anecdotes'
 
 class AnecdoteList extends React.Component {
   render() {
@@ -10,7 +11,6 @@ class AnecdoteList extends React.Component {
       <div>
         <h2>Anecdotes</h2>
         {anecdotes.sort((a, b) => b.votes - a.votes)
-          .filter(c => c.content.toLowerCase().indexOf(this.props.filter.toLowerCase()) !== -1)
           .map(anecdote =>
             <div key={anecdote.id}>
               <div>
@@ -18,9 +18,10 @@ class AnecdoteList extends React.Component {
               </div>
               <div>
                 has {anecdote.votes}
-                <button onClick={() => {
-                  this.props.voteAnecdote(anecdote.id)
-                  this.props.notify(`You voted '${anecdote.content}'`)
+                <button onClick={async () => {
+                  const votedAnecdote = await anecdoteService.voteAnecdote(anecdote)
+                  this.props.voteAnecdote(votedAnecdote)
+                  this.props.notify(`You voted '${votedAnecdote.content}'`)
                   setTimeout(() => {
                     this.props.notify('')
                   }, 5000)

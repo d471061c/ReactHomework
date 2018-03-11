@@ -8,3 +8,6 @@
 * 6.7 paremmat anekdootit, osa 6
 * 6.8 paremmat anekdootit, osa 7
 * 6.9 paremmat anekdootit, osa 8
+* 6.10 anekdootit ja backend, osa 1
+* 6.11 anekdootit ja backend, osa 2
+* 6.12 anekdootit ja backend, osa 3
