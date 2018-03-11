@@ -6,10 +6,19 @@ const reducer = (store = '', action) => {
   return store
 }
 
-export const notify = (message) => {
-  return {
-    type: 'NOTIFICATION',
-    message
+export const notify = (message, timeout) => {
+  return async(dispatch) => {
+    dispatch({
+      type: 'NOTIFICATION',
+      message
+    })
+
+    setTimeout(() => {
+      dispatch({
+        type: 'NOTIFICATION',
+        message: ''
+      })
+    }, timeout * 1000)
   }
 }
 
