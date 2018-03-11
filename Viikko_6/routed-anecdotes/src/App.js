@@ -1,13 +1,29 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, NavLink as Link } from 'react-router-dom'
 
-const Menu = () => (
-    <div>    
-      <Link to='/anecdotes'>anecdotes</Link>&nbsp;
-      <Link to='/create'>create new</Link>&nbsp;
-      <Link to='/about'>about</Link>&nbsp;
+const Menu = () => {
+  const menuStyle = {
+      color: '#A7D7E4',
+      fontSize: 16,
+      borderStyle: 'solid',
+      padding: 10,
+      background: '#A7D7E4'
+  }
+
+  const selected = {
+    fontSize: 16,
+    padding: 10,
+    background: '#7F7F7F'
+  }
+
+  return (
+    <div style={menuStyle}>    
+      <Link activeStyle={ selected } to='/anecdotes'>anecdotes</Link>&nbsp;
+      <Link activeStyle={ selected } to='/create'>create new</Link>&nbsp;
+      <Link activeStyle={ selected } to='/about'>about</Link>&nbsp;
     </div>
-)
+  )
+}
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
@@ -152,12 +168,22 @@ class App extends React.Component {
   }
 
   render() {
+
+    const notificationStyle = {
+      color: 'green',
+      fontSize: 16,
+      borderStyle: 'solid',
+      borderRadius: 10,
+      padding: 10,
+      marginBottom: 5
+    }
+
     return (
       <Router>
         <div>
           <h1>Software anecdotes</h1>
             <Menu />
-            { this.state.notification !== '' ? <div> { this.state.notification }</div> : <div></div> }
+            { this.state.notification !== '' ? <div style={notificationStyle}> { this.state.notification }</div> : <div></div> }
             <Route exact path="/anecdotes" render={() => <AnecdoteList anecdotes={this.state.anecdotes} />} />
             <Route exact path="/anecdotes/:id" render={({match}) =>
               <Anecdote anecdote={this.anecdoteById(match.params.id)} />}
